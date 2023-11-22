@@ -1,21 +1,35 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Character.Movement;
+using Character.Attack;
 
 namespace Inputs
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private PlayerMovement _playerMovement;
+        [SerializeField] private GameObject _player;
 
         public void OnMove(InputAction.CallbackContext context)
         {
+            PlayerMovement playerMovement = _player.GetComponent<PlayerMovement>();
+
             if (context.performed)
             {
-                _playerMovement.SetMovement(context.ReadValue<Vector2>(), true);
+                playerMovement.SetMovement(context.ReadValue<Vector2>(), true);
             }
             else if (context.canceled)
             {
-                _playerMovement.SetMovement(Vector2.zero, true);
+                playerMovement.SetMovement(Vector2.zero, true);
+            }
+        }
+
+        public void OnShoot(InputAction.CallbackContext context)
+        {
+            PlayerAttack playerAttack = _player.GetComponent<PlayerAttack>();
+
+            if (context.started)
+            {
+                playerAttack.SetIsShooting();
             }
         }
     }
