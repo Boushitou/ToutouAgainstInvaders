@@ -8,7 +8,7 @@ namespace Character.Attack
         [SerializeField] private GameObject _projectilePrefab;
         [SerializeField] private Transform _projectileSpawn;
 
-        private float _atkSpeed = 0.3f;
+        private float _atkSpeed = 0.1f;
         private float _coolDown = 0;
         private bool _isShooting;
 
