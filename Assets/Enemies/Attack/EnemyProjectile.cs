@@ -1,3 +1,4 @@
+using Systems.EntityState;
 using Systems.Pooling;
 using UnityEngine;
 
@@ -5,7 +6,8 @@ namespace Enemies.Attack
 {
     public class EnemyProjectile : MonoBehaviour
     {
-        private float _speed = 10f;
+        private float _speed = 8f;
+        private int _damage = 15;
         private Transform _myTransform;
         private Camera _cam;
 
@@ -38,6 +40,18 @@ namespace Enemies.Attack
             if (_myTransform.position.y < _minBound.y || _myTransform.position.y > _maxBound.y)
             {
                 ObjectPoolManager.ReturnObjectPool(gameObject);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision != null)
+            {
+                if (collision.gameObject.CompareTag("PlayerCore"))
+                {
+                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(_damage);
+                    ObjectPoolManager.ReturnObjectPool(gameObject);
+                }
             }
         }
     }

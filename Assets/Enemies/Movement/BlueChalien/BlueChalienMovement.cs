@@ -4,13 +4,13 @@ namespace Enemies.Movement
 {
     public class BlueChalienMovement : EnemyMovement
     {
-        private float _amplitude = 3f;
-        private float _frequency = 5f;
+        private float _amplitude = 8f;
+        private float _frequency = 2f;
         private float _elapsed = 0f;
 
         private void Start()
         {
-            _speed = 3f;
+            _speed = 1f;
         }
 
         public override void Movement()

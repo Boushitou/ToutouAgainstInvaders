@@ -1,4 +1,5 @@
 using Systems.Pooling;
+using Systems.EntityState;
 using UnityEngine;
 
 namespace Character.Attack
@@ -37,6 +38,19 @@ namespace Character.Attack
             if (_myTransform.position.y < _minBound.y || _myTransform.position.y > _maxBound.y)
             {
                 ObjectPoolManager.ReturnObjectPool(gameObject);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision != null)
+            {
+                Debug.Log("collide with enemy");
+                if (collision.gameObject.CompareTag("Enemy"))
+                {
+                    collision.gameObject.GetComponent<Health>().TakeDamage(1);
+                    ObjectPoolManager.ReturnObjectPool(gameObject);
+                }
             }
         }
     }

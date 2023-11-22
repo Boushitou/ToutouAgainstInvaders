@@ -9,7 +9,6 @@ namespace Inputs
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private GameObject _player;
-        [SerializeField] private State _playerState;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -33,17 +32,6 @@ namespace Inputs
             {
                 playerAttack.SetIsShooting();
             }
-        }
-
-        public void OnDamage(InputAction.CallbackContext context)
-        {
-            if (context.started)
-                _playerState.GetPlayerHealth().TakeDamage(10);
-        }
-        public void OnHeal(InputAction.CallbackContext context)
-        {
-            if (context.started)
-                _playerState.GetPlayerHealth().Heal(15);
         }
     }
 }

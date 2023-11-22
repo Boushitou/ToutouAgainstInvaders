@@ -2,19 +2,16 @@ using UnityEngine;
 
 namespace Systems.EntityState
 {
-    public class Health
+    public class Health : MonoBehaviour
     {
         [SerializeField] private int _maxHealth;
         private int _currentHealth;
 
         private bool _isDead;
 
-        public Health(int maxHealth)
+        private void Awake()
         {
-            _maxHealth = maxHealth;
-            _currentHealth = maxHealth;
-
-            _isDead = false;
+            _currentHealth = _maxHealth;
         }
 
         public void TakeDamage(int damage)
@@ -28,7 +25,8 @@ namespace Systems.EntityState
                     _currentHealth = 0;
                     _isDead = true;
 
-                    Debug.Log("Player is dead !");
+                    Debug.Log(gameObject.name + " is dead !");
+                    Destroy(gameObject);
                 }
 
                 Debug.Log("Inflicted: " + damage + " damage");
