@@ -23,7 +23,7 @@ namespace Character.Attack
             {
                 if (Time.time > _coolDown)
                 {
-                    ProjectilePoolManager.SpawnObject(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
+                    ObjectPoolManager.SpawnObject(_projectilePrefab, _projectileSpawn.position, Quaternion.identity, ObjectPoolManager.PoolType.PlayerProjectile);
                     _coolDown = Time.time + _atkSpeed;
                 }
             }

@@ -1,11 +1,11 @@
 using Systems.Pooling;
 using UnityEngine;
 
-namespace Character.Attack
+namespace Enemies.Attack
 {
-    public class PlayerProjectile : MonoBehaviour
+    public class EnemyProjectile : MonoBehaviour
     {
-        private float _speed = 50f;
+        private float _speed = 10f;
         private Transform _myTransform;
         private Camera _cam;
 
@@ -21,7 +21,8 @@ namespace Character.Attack
             _maxBound = _cam.ViewportToWorldPoint(new Vector2(1, 1));
         }
 
-        private void Update()
+        // Update is called once per frame
+        void Update()
         {
             ProjectileMovement();
             ProjectileDestroy();
@@ -29,7 +30,7 @@ namespace Character.Attack
 
         public void ProjectileMovement()
         {
-            _myTransform.position += Vector3.up * _speed * Time.deltaTime;
+            _myTransform.position += Vector3.down * _speed * Time.deltaTime;
         }
 
         public void ProjectileDestroy()
@@ -40,4 +41,5 @@ namespace Character.Attack
             }
         }
     }
+
 }
