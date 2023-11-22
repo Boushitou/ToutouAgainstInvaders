@@ -90,6 +90,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 954b7b0e-fff9-4160-a33b-54a3b3d1b8a2
     m_ActionName: Player/Shoot[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8973470504958490683}
+        m_TargetAssemblyTypeName: Inputs.PlayerController, Assembly-CSharp
+        m_MethodName: OnHeal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 830613f8-1901-496f-89e5-b2e7f3ff246f
+    m_ActionName: Player/TestHeal[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8973470504958490683}
+        m_TargetAssemblyTypeName: Inputs.PlayerController, Assembly-CSharp
+        m_MethodName: OnDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: efde104e-8564-46b2-9473-d79d37e5092b
+    m_ActionName: Player/TestDamage[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

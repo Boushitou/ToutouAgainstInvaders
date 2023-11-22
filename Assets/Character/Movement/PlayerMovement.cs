@@ -41,7 +41,6 @@ namespace Character.Movement
         {
             _direction = direction;
             _isMoving = isMoving;
-
         }
     }
 }
