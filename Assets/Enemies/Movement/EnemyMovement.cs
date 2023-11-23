@@ -1,5 +1,6 @@
 using UnityEngine;
 using Systems.Pooling;
+using Systems.Spawn;
 
 namespace Enemies.Movement
 {
@@ -31,8 +32,8 @@ namespace Enemies.Movement
         {
             if (_myTransform.position.y < _minBound.y - _offset)
             {
-                //ObjectPoolManager.ReturnObjectPool(gameObject);
-                Destroy(gameObject);
+                ObjectPoolManager.ReturnObjectPool(gameObject);
+                SpawnerManager.Instance.RemoveEnemy();
             }
         }
     }

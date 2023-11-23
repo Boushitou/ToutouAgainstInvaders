@@ -1,3 +1,5 @@
+using Systems.Pooling;
+using Systems.Spawn;
 using UnityEngine;
 
 namespace Systems.EntityState
@@ -26,11 +28,20 @@ namespace Systems.EntityState
                     _isDead = true;
 
                     Debug.Log(gameObject.name + " is dead !");
-                    Destroy(gameObject);
+                    
+                    if (gameObject.CompareTag("Enemy"))
+                    {
+                        SpawnerManager.Instance.RemoveEnemy();
+                        ObjectPoolManager.ReturnObjectPool(gameObject);
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
                 }
 
-                Debug.Log("Inflicted: " + damage + " damage");
-                Debug.Log("Current health: " + _currentHealth);
+                //Debug.Log("Inflicted: " + damage + " damage");
+                //Debug.Log("Current health: " + _currentHealth);
             }
         }
 
@@ -45,8 +56,8 @@ namespace Systems.EntityState
                     _currentHealth = _maxHealth;
                 }
 
-                Debug.Log("Healed: " + healAmount + " hp");
-                Debug.Log("Current health: " + _currentHealth);
+                //Debug.Log("Healed: " + healAmount + " hp");
+                //Debug.Log("Current health: " + _currentHealth);
             }
         }
 
