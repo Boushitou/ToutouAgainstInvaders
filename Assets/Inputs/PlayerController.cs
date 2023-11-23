@@ -1,6 +1,5 @@
 using Character.Attack;
 using Character.Movement;
-using Systems.EntityState;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

@@ -45,7 +45,7 @@ namespace Character.Attack
         {
             if (collision != null)
             {
-                Debug.Log("collide with enemy");
+                //Debug.Log("collide with enemy");
                 if (collision.gameObject.CompareTag("Enemy"))
                 {
                     collision.gameObject.GetComponent<Health>().TakeDamage(1);
