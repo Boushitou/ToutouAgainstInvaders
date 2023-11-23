@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies.Movement
 {
-    public class BlueChalienMovement : EnemyMovement
+    public class GreenChalienMovement : EnemyMovement
     {
         private float _amplitude = 8f;
         private float _frequency = 2f;
