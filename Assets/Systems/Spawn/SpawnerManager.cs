@@ -88,6 +88,7 @@ namespace Systems.Spawn
 
             foreach (Transform enemy in GameObject.Find("Enemies").transform)
             {
+                //Does not work when I put it inside the other foreach right after the SpawnObject.
                 ObjectPoolManager.ReturnObjectPool(enemy.gameObject);
             }
         }
