@@ -1,6 +1,7 @@
 using UnityEngine;
 using Systems.Pooling;
 using Systems.Spawn;
+using Systems;
 
 namespace Enemies.Movement
 {
@@ -9,15 +10,11 @@ namespace Enemies.Movement
         protected Transform _myTransform;
         protected float _speed = 0f;
 
-        private Camera _cam;
-        private Vector2 _minBound;
         private float _offset = 5f;
 
         private void Awake()
         {
             _myTransform = transform;
-            _cam = Camera.main;
-            _minBound = _cam.ViewportToWorldPoint(new Vector2(0, 0));
         }
 
         private void Update()
@@ -30,7 +27,7 @@ namespace Enemies.Movement
 
         public void DestroyEnemy()
         {
-            if (_myTransform.position.y < _minBound.y - _offset)
+            if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y - _offset)
             {
                 ObjectPoolManager.ReturnObjectPool(gameObject);
                 SpawnerManager.Instance.RemoveEnemy();

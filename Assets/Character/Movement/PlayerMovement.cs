@@ -1,3 +1,4 @@
+using Systems;
 using UnityEngine;
 
 namespace Character.Movement
@@ -10,17 +11,10 @@ namespace Character.Movement
         private Vector2 _direction = Vector2.zero;
         private bool _isMoving = false;
 
-        private Camera _cam;
-        private Vector2 _minBound;
-        private Vector2 _maxBound;
 
         private void Awake()
         {
             _myTransform = transform;
-            _cam = Camera.main;
-
-            _minBound = _cam.ViewportToWorldPoint(new Vector2(0, 0));
-            _maxBound = _cam.ViewportToWorldPoint(new Vector2(1, 1));
         }
 
         private void Update()
@@ -34,7 +28,9 @@ namespace Character.Movement
             {
                 _myTransform.position += new Vector3(_direction.x, _direction.y) * _speed * Time.deltaTime;
             }
-            _myTransform.position = new Vector3(Mathf.Clamp(_myTransform.position.x, _minBound.x, _maxBound.x), Mathf.Clamp(_myTransform.position.y, _minBound.y, _maxBound.y));
+            _myTransform.position = new Vector3(Mathf.Clamp(_myTransform.position.x, CameraManager.Instance.GetMinBound().x, 
+                CameraManager.Instance.GetMaxBound().x), Mathf.Clamp(_myTransform.position.y,
+                CameraManager.Instance.GetMinBound().y, CameraManager.Instance.GetMaxBound().y));
         }
 
         public void SetMovement(Vector2 direction, bool isMoving)

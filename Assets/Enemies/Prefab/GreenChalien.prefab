@@ -164,6 +164,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 2120895089533871678, guid: 735f87c26d8ffac4d8463ac0a7751f64, type: 3}
   _bulletSpawn: {fileID: 8461040258297077960}
+  _patternType: 2
+  startAngle: 0
+  endAngle: 0
+  bulletAmount: 0
 --- !u!114 &3137249212745005569
 MonoBehaviour:
   m_ObjectHideFlags: 0
