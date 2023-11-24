@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Enemies.Attack
 {
-    public class BlueChalienAttack : EnemyAttack
+    public class BossAttack : EnemyAttack
     {
         private void Start()
         {
-            _patternType = PatternType.None;
+            _patternType = PatternType.Circle;
             _atkSpeed = 0.3f;
         }
     }

@@ -33,13 +33,19 @@ namespace Systems.Spawn
                 Destroy(this);
             }
 
-            _currentWave = _waves[_currentWaveNb];
+            if (_waves.Length > 0)
+            {
+                _currentWave = _waves[_currentWaveNb];
+            }
         }
 
         private void Start()
         {
-            PreInstantianteEnemies();
-            StartCoroutine(SpawnWaves());
+            if (_currentWave != null)
+            {
+                PreInstantianteEnemies();
+                StartCoroutine(SpawnWaves());
+            }
         }
 
         public IEnumerator SpawnWaves()
