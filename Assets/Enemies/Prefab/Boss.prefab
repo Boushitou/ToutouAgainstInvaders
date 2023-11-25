@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _scoreAmount: 100000
 --- !u!60 &7566983751202419933
 PolygonCollider2D:
   m_ObjectHideFlags: 0

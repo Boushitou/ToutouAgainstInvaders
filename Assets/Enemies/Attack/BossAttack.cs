@@ -1,6 +1,3 @@
-using Systems.Pooling;
-using UnityEngine;
-
 namespace Enemies.Attack
 {
     public class BossAttack : EnemyAttack
