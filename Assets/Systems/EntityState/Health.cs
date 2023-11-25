@@ -40,7 +40,9 @@ namespace Systems.EntityState
                     }
                     else
                     {
+                        string gameOverTxt = "You died !";
                         Destroy(gameObject);
+                        UIManager.Instance.OpenGameOverMenu(gameOverTxt);
                     }
                 }
 
