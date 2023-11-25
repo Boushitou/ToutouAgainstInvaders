@@ -18,7 +18,7 @@ namespace Character.Attack
         private void Update()
         {
             ProjectileMovement();
-            ProjectileDestroy();
+            ProjectileOutOfBound();
         }
 
         public void ProjectileMovement()
@@ -26,7 +26,7 @@ namespace Character.Attack
             _myTransform.position += Vector3.up * _speed * Time.deltaTime;
         }
 
-        public void ProjectileDestroy()
+        public void ProjectileOutOfBound()
         {
             if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y || _myTransform.position.y > CameraManager.Instance.GetMaxBound().y)
             {

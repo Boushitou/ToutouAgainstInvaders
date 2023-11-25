@@ -1,5 +1,7 @@
+using Enemies.Attack;
 using Systems.Pooling;
 using Systems.Spawn;
+using Systems.UI;
 using UnityEngine;
 
 namespace Systems.EntityState
@@ -7,6 +9,7 @@ namespace Systems.EntityState
     public class Health : MonoBehaviour
     {
         [SerializeField] private int _maxHealth;
+        [SerializeField] private int _scoreAmount;
         private int _currentHealth;
 
         private bool _isDead;
@@ -32,6 +35,7 @@ namespace Systems.EntityState
                     if (gameObject.CompareTag("Enemy"))
                     {
                         SpawnerManager.Instance.RemoveEnemy();
+                        UIManager.Instance.AddScore(_scoreAmount);
                         ObjectPoolManager.ReturnObjectPool(gameObject);
                     }
                     else

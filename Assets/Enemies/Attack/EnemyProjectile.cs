@@ -21,7 +21,7 @@ namespace Enemies.Attack
         void Update()
         {
             ProjectileMovement();
-            ProjectileDestroy();
+            ProjectileOutOfBound();
         }
 
         public void ProjectileMovement()
@@ -29,7 +29,7 @@ namespace Enemies.Attack
             _myTransform.Translate(_direction * _speed * Time.deltaTime);
         }
 
-        public void ProjectileDestroy()
+        public void ProjectileOutOfBound()
         {
             if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y || _myTransform.position.y > CameraManager.Instance.GetMaxBound().y)
             {
