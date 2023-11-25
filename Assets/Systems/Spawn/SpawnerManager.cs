@@ -3,6 +3,7 @@ using System.Collections;
 using Systems.Pooling;
 using Systems.UI;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Systems.Spawn
 {
@@ -77,6 +78,9 @@ namespace Systems.Spawn
             }
 
             Debug.Log("Waves over !");
+
+            string gameOverTxt = "Congratulation !";
+            UIManager.Instance.OpenGameOverMenu(gameOverTxt);
         }
 
         public void RemoveEnemy()

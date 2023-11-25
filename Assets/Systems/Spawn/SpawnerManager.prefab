@@ -44,3 +44,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27eef847a2fb2c048b0d626955ebc325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waves:
+  - _waveName: Wave 1
+    _enemies:
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    _positions:
+    - {x: -9.1, y: 15, z: 0}
+    - {x: 3.17, y: 15, z: 0}
+    - {x: 17.16, y: 15, z: 0}
+    - {x: 3.17, y: 30, z: 0}
+    - {x: -9.1, y: 30, z: 0}
+    - {x: 17.16, y: 30, z: 0}
+  - _waveName: Wave 2
+    _enemies:
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    - {fileID: 1216446501241793579, guid: 8206070f513f9f74cbed3f975e8f0c24, type: 3}
+    _positions:
+    - {x: -9.1, y: 15, z: 0}
+    - {x: -5.1, y: 15, z: 0}
+    - {x: -1.1, y: 15, z: 0}
+    - {x: 3.1, y: 15, z: 0}
+    - {x: 5.16, y: 30, z: 0}
+    - {x: 9.16, y: 30, z: 0}
+    - {x: 13.16, y: 30, z: 0}
+    - {x: 17.16, y: 30, z: 0}
+  - _waveName: Boss Wave
+    _enemies:
+    - {fileID: 4831503268041996515, guid: a2242856775c14443a111529ef56414f, type: 3}
+    _positions:
+    - {x: 0, y: 24.69, z: 0}
+  - _waveName: 
+    _enemies: []
+    _positions: []
+  - _waveName: 
+    _enemies: []
+    _positions: []

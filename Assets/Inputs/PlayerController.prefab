@@ -50,7 +50,19 @@ MonoBehaviour:
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8148404600129203188, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+        m_TargetAssemblyTypeName: Systems.UI.UIManager, Assembly-CSharp
+        m_MethodName: OpenClosePauseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_DeviceRegainedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -94,7 +106,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8973470504958490683}
         m_TargetAssemblyTypeName: Inputs.PlayerController, Assembly-CSharp
-        m_MethodName: OnHeal
+        m_MethodName: OnPause
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -104,24 +116,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 830613f8-1901-496f-89e5-b2e7f3ff246f
-    m_ActionName: Player/TestHeal[/Keyboard/a]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8973470504958490683}
-        m_TargetAssemblyTypeName: Inputs.PlayerController, Assembly-CSharp
-        m_MethodName: OnDamage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: efde104e-8564-46b2-9473-d79d37e5092b
-    m_ActionName: Player/TestDamage[/Keyboard/e]
+    m_ActionId: bc3c4585-01c5-4821-9360-73ad7aad5209
+    m_ActionName: Player/PauseGame[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
