@@ -137,6 +137,7 @@ namespace Systems.Pooling
             if (pool == null)
             {
                 Debug.LogWarning("Trying to release an object that is not pooled: " + objName);
+                Destroy(obj);
             }
             else
             {

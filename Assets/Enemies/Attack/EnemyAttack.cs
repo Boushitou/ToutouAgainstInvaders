@@ -45,7 +45,8 @@ namespace Enemies.Attack
                 }
                 else
                 {
-                    ObjectPoolManager.SpawnObject(_bulletPrefab, _bulletSpawn.position, _atkRotation, ObjectPoolManager.PoolType.EnemyProjectile);
+                    GameObject bullet = ObjectPoolManager.SpawnObject(_bulletPrefab, _bulletSpawn.position, _atkRotation, ObjectPoolManager.PoolType.EnemyProjectile);
+                    bullet.GetComponent<EnemyProjectile>().SetDirection(Vector2.down);
                 }
                 _coolDown = Time.time + _atkSpeed;
             }

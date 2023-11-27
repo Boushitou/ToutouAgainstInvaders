@@ -33,18 +33,5 @@ namespace Character.Attack
                 ObjectPoolManager.ReturnObjectPool(gameObject);
             }
         }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision != null)
-            {
-                //Debug.Log("collide with enemy");
-                if (collision.gameObject.CompareTag("Enemy"))
-                {
-                    collision.gameObject.GetComponent<Health>().TakeDamage(1);
-                    ObjectPoolManager.ReturnObjectPool(gameObject);
-                }
-            }
-        }
     }
 }
