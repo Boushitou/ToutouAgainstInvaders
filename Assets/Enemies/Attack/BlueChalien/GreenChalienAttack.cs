@@ -1,6 +1,6 @@
 namespace Enemies.Attack
 {
-    public class BlueChalienAttack : EnemyAttack
+    public class GreenChalienAttack : EnemyAttack
     {
         private void Start()
         {

@@ -31,7 +31,8 @@ namespace Enemies.Attack
 
         public void ProjectileOutOfBound()
         {
-            if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y || _myTransform.position.y > CameraManager.Instance.GetMaxBound().y)
+            if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y || _myTransform.position.y > CameraManager.Instance.GetMaxBound().y ||
+                _myTransform.position.x < CameraManager.Instance.GetMinBound().x || _myTransform.position.x > CameraManager.Instance.GetMaxBound().x)
             {
                 ObjectPoolManager.ReturnObjectPool(gameObject);
             }
@@ -42,16 +43,9 @@ namespace Enemies.Attack
             _direction = direction;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public int GetDamagge()
         {
-            if (collision != null)
-            {
-                if (collision.gameObject.CompareTag("PlayerCore"))
-                {
-                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(_damage);
-                    ObjectPoolManager.ReturnObjectPool(gameObject);
-                }
-            }
+            return _damage;
         }
     }
 }

@@ -1,12 +1,11 @@
-using Enemies.Attack;
 using System.Collections;
 using Systems.Pooling;
 using Systems.UI;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Systems.Spawn
 {
+    /* IMPORTANT, KEEP AN EMPTY WAVE SO THE GAME OVER SCREEN DONT OPEN BEFORE THE BOSS IS DEAD ! */
     [System.Serializable]
     public class Wave
     {
@@ -49,6 +48,8 @@ namespace Systems.Spawn
                 PreInstantianteEnemies();
                 StartCoroutine(SpawnWaves());
             }
+
+            //Debug.Log(_waves.Length);
         }
 
         public IEnumerator SpawnWaves()
@@ -59,6 +60,7 @@ namespace Systems.Spawn
             {
                 if (_enemiesLeft <= 0)
                 {
+                    Debug.Log(_currentWave._waveName);
                     index++;
                     _enemiesLeft = _waves[_currentWaveNb]._enemies.Length;
 

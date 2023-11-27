@@ -1,4 +1,8 @@
+using Enemies.Attack;
 using Systems;
+using Systems.EntityState;
+using Systems.Pooling;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Character.Movement
@@ -37,6 +41,18 @@ namespace Character.Movement
         {
             _direction = direction;
             _isMoving = isMoving;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision != null)
+            {
+                if (collision.gameObject.CompareTag("EnemyBullet"))
+                {
+                    GetComponentInParent<Health>().TakeDamage(collision.GetComponent<EnemyProjectile>().GetDamagge());
+                    ObjectPoolManager.ReturnObjectPool(collision.gameObject);
+                }
+            }
         }
     }
 }
