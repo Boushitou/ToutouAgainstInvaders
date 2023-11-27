@@ -42,7 +42,7 @@ namespace Enemies.Movement
             {
                 if (collision.gameObject.CompareTag("PlayerBullet"))
                 {
-                    GetComponentInParent<Health>().TakeDamage(1);
+                    GetComponent<Health>().TakeDamage(1);
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
                 }
             }
