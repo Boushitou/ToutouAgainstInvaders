@@ -66,7 +66,7 @@ namespace Systems.Spawn
 
                     for (int i = 0; i < _currentWave._enemies.Length; i++)
                     {
-                        ObjectPoolManager.SpawnObject(_currentWave._enemies[i], _currentWave._positions[i], Quaternion.Euler(0, 0, 180), ObjectPoolManager.PoolType.Enemies);
+                        ObjectPoolManager.SpawnObject(_currentWave._enemies[i], _currentWave._positions[i], Quaternion.identity, ObjectPoolManager.PoolType.Enemies);
                     }
 
                     _currentWaveNb++;
@@ -96,7 +96,7 @@ namespace Systems.Spawn
             {
                 foreach (GameObject enemy in wave._enemies)
                 {
-                    ObjectPoolManager.SpawnObject(enemy, new Vector3(0, 100, 0), Quaternion.Euler(0, 0, 180), ObjectPoolManager.PoolType.Enemies);
+                    ObjectPoolManager.SpawnObject(enemy, new Vector3(0, 100, 0), Quaternion.identity, ObjectPoolManager.PoolType.Enemies);
                 }
             }
 

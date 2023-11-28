@@ -4,6 +4,7 @@ using Systems.Spawn;
 using Systems;
 using Enemies.Attack;
 using Systems.EntityState;
+using Character.Attack;
 
 namespace Enemies.Movement
 {
@@ -43,6 +44,8 @@ namespace Enemies.Movement
                 if (collision.gameObject.CompareTag("PlayerBullet"))
                 {
                     GetComponent<Health>().TakeDamage(1);
+
+                    collision.GetComponent<PlayerProjectile>().InstantiateParticles();
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
                 }
             }
