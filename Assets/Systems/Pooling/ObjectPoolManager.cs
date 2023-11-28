@@ -12,12 +12,14 @@ namespace Systems.Pooling
         private static GameObject _playerProjectileEmpty;
         private static GameObject _enemiesProjectileEmpty;
         private static GameObject _enemiesEmpty;
+        private static GameObject _particleSystem;
 
         public enum PoolType
         {
             PlayerProjectile,
             EnemyProjectile,
             Enemies,
+            Particules,
             None
         }
 
@@ -40,6 +42,9 @@ namespace Systems.Pooling
 
             _enemiesEmpty = new GameObject("Enemies");
             _enemiesEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
+
+            _particleSystem = new GameObject("Particles System");
+            _particleSystem.transform.SetParent(_objectPoolEmptyHolder.transform);
         }
 
         public static GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
@@ -112,6 +117,8 @@ namespace Systems.Pooling
                     return _enemiesProjectileEmpty;
                 case PoolType.Enemies:
                     return _enemiesEmpty;
+                case PoolType.Particules:
+                    return _particleSystem;
                 case PoolType.None:
                     return null;
                 default: 

@@ -121,6 +121,7 @@ MonoBehaviour:
   _score: {fileID: 8658015852039485656}
   _pauseMenu: {fileID: 3964784549645937895}
   _gameOverMenu: {fileID: 1628424254140658203}
+  _hpBar: {fileID: 6406926991428630070}
 --- !u!1 &850106758972844932
 GameObject:
   m_ObjectHideFlags: 0

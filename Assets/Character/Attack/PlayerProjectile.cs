@@ -7,6 +7,8 @@ namespace Character.Attack
 {
     public class PlayerProjectile : MonoBehaviour
     {
+        [SerializeField] GameObject _particles;
+
         private float _speed = 50f;
         private Transform _myTransform;
 
@@ -32,6 +34,11 @@ namespace Character.Attack
             {
                 ObjectPoolManager.ReturnObjectPool(gameObject);
             }
+        }
+
+        public void InstantiateParticles()
+        {
+            ObjectPoolManager.SpawnObject(_particles, _myTransform.position, Quaternion.identity, ObjectPoolManager.PoolType.Particules);
         }
     }
 }
