@@ -263,6 +263,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5492079205697455738, guid: f838e967780878a47a463db8fbc36727, type: 3}
   m_PrefabInstance: {fileID: 483270796}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &682160637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6406926991428630070, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+  m_PrefabInstance: {fileID: 1092499071080548203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1687777769
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,13 +476,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 812147550614990094, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
-      propertyPath: m_Interactable
+    - target: {fileID: 3918617832217097371, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6129467404438377247, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+      propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 812147550614990094, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
-      propertyPath: m_Colors.m_ColorMultiplier
-      value: 1
+    - target: {fileID: 8148404600129203188, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+      propertyPath: _hpBar
+      value: 
+      objectReference: {fileID: 682160637}
+    - target: {fileID: 8965123009057906371, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965123009057906371, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965123009057906371, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965123009057906371, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     - target: {fileID: 9162671393116209543, guid: 445a26fc30f43f24f9af62da74557c5e, type: 3}
       propertyPath: m_Pivot.x
