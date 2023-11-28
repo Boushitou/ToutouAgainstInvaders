@@ -7,14 +7,12 @@ namespace BehaviourTree
 {
     public class BossBT : TreeBT
     {
-        //private int _currentPhase = 1;
-
         protected override Node SetupTree()
         {
             Node root = new Sequence(new List<Node>
             {
-                new BossPhase1(gameObject)
-                //phase2
+                new BossPhase1(gameObject),
+                new BossPhase2(gameObject)
                 //phase3
             });
 
@@ -29,7 +27,6 @@ namespace BehaviourTree
                 {
                     GetComponentInParent<Health>().TakeDamage(1);
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
-
                 }
             }
         }

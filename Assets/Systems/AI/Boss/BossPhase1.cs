@@ -1,6 +1,7 @@
 using Systems.EntityState;
 using UnityEngine;
 using Systems;
+using Enemies.Attack;
 
 namespace BehaviourTree
 {
@@ -26,15 +27,16 @@ namespace BehaviourTree
 
         public override NodeState Evaluate()
         {
-            state = NodeState.FAILURE;
-
-            EnteringArena();
-            Movement();
+            if (!HealthUnderFifty())
+            {
+                EnteringArena();
+                Movement();
+            }
 
             return state;
         }
 
-        public void EnteringArena()
+        private void EnteringArena()
         {
             if (!_isInArena)
             {
@@ -48,7 +50,7 @@ namespace BehaviourTree
             }
         }
 
-        public void Movement()
+        private void Movement()
         {
             if (_isInArena)
             {
@@ -65,11 +67,17 @@ namespace BehaviourTree
             }
         }
 
-        public void CheckBossHealth()
+        private bool HealthUnderFifty()
         {
             if (_bossHealth.GetHealthPercentage() <= 50)
             {
                 state = NodeState.SUCCESS;
+                return true;
+            }
+            else
+            {
+                state = NodeState.FAILURE;
+                return false;
             }
         }
     }

@@ -30,5 +30,7 @@ namespace Systems
 
         public Vector2 GetMinBound() { return _minBound; }
         public Vector2 GetMaxBound() { return _maxBound; }
+
+        public Camera GetCamera() { return _cam; }
     }
 }
