@@ -1,5 +1,4 @@
 using Systems;
-using Systems.EntityState;
 using Systems.Pooling;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace Enemies.Attack
     public class EnemyProjectile : MonoBehaviour
     {
         private float _speed = 8f;
-        private int _damage = 15;
+        private int _damage = 5;
         private Transform _myTransform;
         private Vector3 _direction = Vector2.down;
 
