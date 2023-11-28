@@ -89,9 +89,9 @@ namespace Systems.EntityState
             return _isDead;
         }
 
-        public int GetHealthPercentage()
+        public float GetHealthPercentage()
         {
-            return (_currentHealth / _maxHealth) * 100;
+            return ((float)_currentHealth / _maxHealth) * 100;
         }
 
         public int GetCurrentHealth()
