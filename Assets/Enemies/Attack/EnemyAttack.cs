@@ -56,7 +56,7 @@ namespace Enemies.Attack
                         float angleStep = (_endAngle - _startAngle) / _bulletAmount;
                         float angle = _startAngle;
 
-                        CircleAttack(angleStep, angle, _bulletAmount, _myTransform);
+                        CircleAttack(angleStep, angle, _bulletAmount, _myTransform, _bulletSpeed);
                     }
                     else if (_patternType == PatternType.Spiral)
                     {
@@ -73,7 +73,7 @@ namespace Enemies.Attack
             }
         }
 
-        public void CircleAttack(float angleStep, float angle, int bulletAmount, Transform myTransform)
+        public void CircleAttack(float angleStep, float angle, int bulletAmount, Transform myTransform, float speed)
         {
             for (int i = 0; i < bulletAmount + 1; i++)
             {
@@ -84,6 +84,7 @@ namespace Enemies.Attack
 
                 GameObject bullet = ObjectPoolManager.SpawnObject(_bulletPrefab, myTransform.position, Quaternion.identity, ObjectPoolManager.PoolType.EnemyProjectile);
                 bullet.GetComponent<EnemyProjectile>().SetDirection(bulletDir);
+                bullet.GetComponent<EnemyProjectile>().SetSpeed(speed);
 
                 angle += angleStep;
             }
@@ -93,7 +94,7 @@ namespace Enemies.Attack
         {
             for (int i = 0; i <= shootNb; i++)
             {
-                CircleAttack(angleStep, angle, bulletAmount, myTransform);
+                CircleAttack(angleStep, angle, bulletAmount, myTransform, 15f);
 
                 yield return new WaitForSeconds(atkSpeed);
             }

@@ -13,7 +13,7 @@ namespace BehaviourTree
 
         private int _bulletNb = 3;
         private int _shootNb = 3;
-        private float _angleOffset = 20f;
+        private float _angleOffset = 40f;
 
         private bool _canMove = true;
 
@@ -33,8 +33,6 @@ namespace BehaviourTree
         public override NodeState Evaluate()
         {
             _boss.GetComponent<BossAttack>().SetDirection((_player.transform.position - _boss.transform.position).normalized);
-            float angle = Mathf.Atan2(_player.transform.position.y - _shootPos.position.y, _player.transform.position.x - _shootPos.position.x) * Mathf.Rad2Deg;
-            Debug.Log(angle);
 
             if (_canMove)
             {
@@ -67,11 +65,15 @@ namespace BehaviourTree
 
             _boss.transform.position = targetPos;
 
-            float angle = Mathf.Atan2(_player.transform.position.y - _shootPos.position.y, _player.transform.position.x - _shootPos.position.x) * Mathf.Rad2Deg;
-            Debug.Log(angle);
+            Vector2 bulletDir = (_player.transform.position - _shootPos.position).normalized;
 
-            float startAngle = angle - _angleOffset;
-            float endAngle = angle + _angleOffset;
+            float angle = Vector2.SignedAngle(Vector2.up, bulletDir);
+
+            Debug.Log(angle);
+            angle = -angle;
+
+            float startAngle = angle - _angleOffset / 2f;
+            float endAngle = angle + _angleOffset / 2f;
             float angleStep = (endAngle - startAngle) / _bulletNb;
 
             _behaviour.StartCoroutine(_boss.GetComponent<BossAttack>().LaunchCircleAttack(_shootNb, _atkSpeed, angleStep, startAngle, _bulletNb, _shootPos));
