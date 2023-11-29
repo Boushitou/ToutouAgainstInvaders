@@ -84,6 +84,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4754585906599197643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7925038270198697884}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7925038270198697884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4754585906599197643}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.29500008, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6486636221477916783}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4831503268041996515
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +149,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7925038270198697884}
   - {fileID: 8490889979087234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -133,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a48c05dc9252134e82822793421f5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shootPos: {fileID: 7925038270198697884}
 --- !u!114 &4082361960364987649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,11 +179,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 2120895089533871678, guid: 735f87c26d8ffac4d8463ac0a7751f64, type: 3}
-  _bulletSpawn: {fileID: 0}
+  _bulletSpawn: {fileID: 7925038270198697884}
   _patternType: 0
-  startAngle: 100
-  endAngle: 260
-  bulletAmount: 10
+  _startAngle: 90
+  _endAngle: 270
+  _bulletAmount: 10
 --- !u!114 &8707494284688079751
 MonoBehaviour:
   m_ObjectHideFlags: 0

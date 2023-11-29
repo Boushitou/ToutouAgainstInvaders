@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b10e0de0cb75674a9d7ec6c623172b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particles: {fileID: 5587829976619379255, guid: a25f834c79dd07744bf4559cdf32b273, type: 3}
 --- !u!114 &4301244818763941547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,9 +162,9 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 2120895089533871678, guid: 735f87c26d8ffac4d8463ac0a7751f64, type: 3}
   _bulletSpawn: {fileID: 6256983925017532468}
   _patternType: 0
-  startAngle: 0
-  endAngle: 360
-  bulletAmount: 20
+  _startAngle: 0
+  _endAngle: 360
+  _bulletAmount: 20
 --- !u!50 &7687416452035001384
 Rigidbody2D:
   serializedVersion: 4

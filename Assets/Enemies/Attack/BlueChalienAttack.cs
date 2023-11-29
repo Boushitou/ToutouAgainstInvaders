@@ -9,8 +9,8 @@ namespace Enemies.Attack
             _patternType = PatternType.Circle;
             _atkSpeed = 0.4f;
 
-            startAngle += 10f;
-            endAngle += 10f;
+            _startAngle += 10f;
+            _endAngle += 10f;
         }
     }
 }
