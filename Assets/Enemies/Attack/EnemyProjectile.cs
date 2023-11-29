@@ -46,5 +46,10 @@ namespace Enemies.Attack
         {
             return _damage;
         }
+
+        public void SetSpeed(float speed)
+        {
+            _speed = speed;
+        }
     }
 }

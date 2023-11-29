@@ -10,6 +10,7 @@ namespace BehaviourTree
         private Vector2 _center;
         private bool _isInCenter;
         private GameObject _boss;
+        private float _atkSpeed = 0.03f;
 
         public BossPhase2(GameObject boss)
         {
@@ -41,11 +42,11 @@ namespace BehaviourTree
 
                 if (Vector3.Distance(_center, _boss.transform.position) < 0.2f)
                 {
-                    _boss.transform.position = Vector2.zero;
+                    _boss.transform.position = _center;
 
                     bossAttack.SetCanShoot(true);
                     bossAttack.SetPattern(EnemyAttack.PatternType.Spiral);
-                    bossAttack.SetAtkSpeed(0.03f);
+                    bossAttack.SetAtkSpeed(_atkSpeed);
                     _isInCenter = true;
                 }
             }
@@ -55,6 +56,8 @@ namespace BehaviourTree
         {
             if (_boss.GetComponent<Health>().GetHealthPercentage() <= 25)
             {
+                _boss.GetComponent<BossAttack>().SetCanShoot(false);
+
                 state = NodeState.SUCCESS;
                 return true;
             }
