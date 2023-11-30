@@ -32,17 +32,20 @@ namespace BehaviourTree
 
         public override NodeState Evaluate()
         {
-            _boss.GetComponent<BossAttack>().SetDirection((_player.transform.position - _boss.transform.position).normalized);
-
-            if (_canMove)
+            if (_player != null)
             {
-                if (Time.time > _coolDown)
+                _boss.GetComponent<BossAttack>().SetDirection((_player.transform.position - _boss.transform.position).normalized);
+
+                if (_canMove)
                 {
-                    _canMove = false;
+                    if (Time.time > _coolDown)
+                    {
+                        _canMove = false;
 
-                    _behaviour.StartCoroutine(MoveTowardPlayer(_boss.transform.position, _player.transform.position));
+                        _behaviour.StartCoroutine(MoveTowardPlayer(_boss.transform.position, _player.transform.position));
 
-                    _coolDown = Time.time + _moveCooldown;
+                        _coolDown = Time.time + _moveCooldown;
+                    }
                 }
             }
 
