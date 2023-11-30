@@ -24,6 +24,8 @@ namespace Systems.Spawn
         private int _currentWaveNb = 0;
         private int _enemiesLeft = 0;
 
+        private bool _bossDead;
+
         private void Awake()
         {
             if (Instance == null)
@@ -80,9 +82,6 @@ namespace Systems.Spawn
             }
 
             Debug.Log("Waves over !");
-
-            string gameOverTxt = "Congratulation !";
-            UIManager.Instance.OpenGameOverMenu(gameOverTxt);
         }
 
         public void RemoveEnemy()

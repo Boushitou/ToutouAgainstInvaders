@@ -10,11 +10,14 @@ namespace Character.Movement
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float _speed = 10f;
+        [SerializeField] private GameObject _bloodParticles;
 
         private Transform _myTransform;
         private Vector2 _direction = Vector2.zero;
         private bool _isMoving = false;
 
+        private float _contactDmgTimer = 0.2f;
+        private float _contactDmgCoolDown = 0f;
 
         private void Awake()
         {
@@ -49,8 +52,24 @@ namespace Character.Movement
             {
                 if (collision.gameObject.CompareTag("EnemyBullet"))
                 {
-                    GetComponentInParent<Health>().TakeDamage(collision.GetComponent<EnemyProjectile>().GetDamagge());
+                    GetComponent<Health>().TakeDamage(collision.GetComponent<EnemyProjectile>().GetDamagge());
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
+                    StartCoroutine(CameraManager.Instance.ShakeScreen(0.2f));
+                }
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (collision != null)
+            {
+                if (collision.gameObject.CompareTag("Enemy"))
+                {
+                    if (Time.time > _contactDmgCoolDown)
+                    {
+                        GetComponent<Health>().TakeDamage(1);
+                        _contactDmgCoolDown = Time.time + _contactDmgTimer;
+                    }
                 }
             }
         }

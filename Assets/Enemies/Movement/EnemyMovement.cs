@@ -1,10 +1,10 @@
-using UnityEngine;
+using Character.Attack;
+using System.Collections;
+using Systems;
+using Systems.EntityState;
 using Systems.Pooling;
 using Systems.Spawn;
-using Systems;
-using Enemies.Attack;
-using Systems.EntityState;
-using Character.Attack;
+using UnityEngine;
 
 namespace Enemies.Movement
 {
@@ -15,9 +15,15 @@ namespace Enemies.Movement
 
         private float _offset = 5f;
 
+        private Color _originalColor;
+        private Color _damagedColor = Color.red;
+        private SpriteRenderer _spriteRenderer;
+
         private void Awake()
         {
             _myTransform = transform;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _originalColor = _spriteRenderer.material.color;
         }
 
         private void Update()
@@ -47,8 +53,21 @@ namespace Enemies.Movement
 
                     collision.GetComponent<PlayerProjectile>().InstantiateParticles();
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
+                    if (gameObject.activeSelf)
+                    {
+                        StartCoroutine(ChangeColor());
+                    }
                 }
             }
+        }
+
+        public IEnumerator ChangeColor()
+        {
+            _spriteRenderer.material.color = _damagedColor;
+
+            yield return new WaitForSeconds(0.05f);
+
+            _spriteRenderer.material.color = _originalColor;
         }
     }
 }

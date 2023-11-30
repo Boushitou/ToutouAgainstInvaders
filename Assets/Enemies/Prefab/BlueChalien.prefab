@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 20
   _scoreAmount: 1000
+  _bloodParticles: {fileID: 222593393553989946, guid: acde16384153dca4fab0db149474ddeb, type: 3}
 --- !u!114 &4418560710931898122
 MonoBehaviour:
   m_ObjectHideFlags: 0
