@@ -19,7 +19,7 @@ namespace BehaviourTree
         private SpriteRenderer _spriteRenderer;
         private Transform _myTransform;
 
-        private float _shakeTime = 3f;
+        private float _shakeTime = 4f;
         private float _shakeAmount = 15f;
 
         private void Awake()
