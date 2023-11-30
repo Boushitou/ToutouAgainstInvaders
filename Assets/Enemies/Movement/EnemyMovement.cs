@@ -2,6 +2,9 @@ using UnityEngine;
 using Systems.Pooling;
 using Systems.Spawn;
 using Systems;
+using Enemies.Attack;
+using Systems.EntityState;
+using Character.Attack;
 
 namespace Enemies.Movement
 {
@@ -31,6 +34,20 @@ namespace Enemies.Movement
             {
                 ObjectPoolManager.ReturnObjectPool(gameObject);
                 SpawnerManager.Instance.RemoveEnemy();
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision != null)
+            {
+                if (collision.gameObject.CompareTag("PlayerBullet"))
+                {
+                    GetComponent<Health>().TakeDamage(1);
+
+                    collision.GetComponent<PlayerProjectile>().InstantiateParticles();
+                    ObjectPoolManager.ReturnObjectPool(collision.gameObject);
+                }
             }
         }
     }

@@ -7,6 +7,8 @@ namespace Character.Attack
 {
     public class PlayerProjectile : MonoBehaviour
     {
+        [SerializeField] GameObject _particles;
+
         private float _speed = 50f;
         private Transform _myTransform;
 
@@ -34,17 +36,9 @@ namespace Character.Attack
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public void InstantiateParticles()
         {
-            if (collision != null)
-            {
-                //Debug.Log("collide with enemy");
-                if (collision.gameObject.CompareTag("Enemy"))
-                {
-                    collision.gameObject.GetComponent<Health>().TakeDamage(1);
-                    ObjectPoolManager.ReturnObjectPool(gameObject);
-                }
-            }
+            ObjectPoolManager.SpawnObject(_particles, _myTransform.position, Quaternion.identity, ObjectPoolManager.PoolType.Particules);
         }
     }
 }

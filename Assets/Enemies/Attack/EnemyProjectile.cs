@@ -1,5 +1,4 @@
 using Systems;
-using Systems.EntityState;
 using Systems.Pooling;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace Enemies.Attack
     public class EnemyProjectile : MonoBehaviour
     {
         private float _speed = 8f;
-        private int _damage = 15;
+        private int _damage = 5;
         private Transform _myTransform;
         private Vector3 _direction = Vector2.down;
 
@@ -31,7 +30,8 @@ namespace Enemies.Attack
 
         public void ProjectileOutOfBound()
         {
-            if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y || _myTransform.position.y > CameraManager.Instance.GetMaxBound().y)
+            if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y || _myTransform.position.y > CameraManager.Instance.GetMaxBound().y ||
+                _myTransform.position.x < CameraManager.Instance.GetMinBound().x || _myTransform.position.x > CameraManager.Instance.GetMaxBound().x)
             {
                 ObjectPoolManager.ReturnObjectPool(gameObject);
             }
@@ -42,16 +42,14 @@ namespace Enemies.Attack
             _direction = direction;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public int GetDamagge()
         {
-            if (collision != null)
-            {
-                if (collision.gameObject.CompareTag("PlayerCore"))
-                {
-                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(_damage);
-                    ObjectPoolManager.ReturnObjectPool(gameObject);
-                }
-            }
+            return _damage;
+        }
+
+        public void SetSpeed(float speed)
+        {
+            _speed = speed;
         }
     }
 }

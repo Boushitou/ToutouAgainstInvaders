@@ -1,4 +1,3 @@
-using Enemies.Attack;
 using Systems.Pooling;
 using Systems.Spawn;
 using Systems.UI;
@@ -17,6 +16,14 @@ namespace Systems.EntityState
         private void Awake()
         {
             _currentHealth = _maxHealth;
+        }
+
+        private void Start()
+        {
+            if (!gameObject.CompareTag("Enemy"))
+            {
+                UIManager.Instance.UpdateHpBar(_currentHealth, _maxHealth);
+            }
         }
 
         public void TakeDamage(int damage)
@@ -46,6 +53,11 @@ namespace Systems.EntityState
                     }
                 }
 
+                if (!gameObject.CompareTag("Enemy"))
+                {
+                    UIManager.Instance.UpdateHpBar(_currentHealth, _maxHealth);
+                }
+
                 //Debug.Log("Inflicted: " + damage + " damage");
                 //Debug.Log("Current health: " + _currentHealth);
             }
@@ -62,6 +74,11 @@ namespace Systems.EntityState
                     _currentHealth = _maxHealth;
                 }
 
+                if (!gameObject.CompareTag("Enemy"))
+                {
+                    UIManager.Instance.UpdateHpBar(_currentHealth, _maxHealth);
+                }
+
                 //Debug.Log("Healed: " + healAmount + " hp");
                 //Debug.Log("Current health: " + _currentHealth);
             }
@@ -72,9 +89,9 @@ namespace Systems.EntityState
             return _isDead;
         }
 
-        public int GetHealthPercentage()
+        public float GetHealthPercentage()
         {
-            return (_currentHealth / _maxHealth) * 100;
+            return ((float)_currentHealth / _maxHealth) * 100;
         }
 
         public int GetCurrentHealth()

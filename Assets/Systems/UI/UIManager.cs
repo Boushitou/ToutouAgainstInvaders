@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Systems.UI
 {
@@ -13,8 +13,11 @@ namespace Systems.UI
         [SerializeField] private Score _score;
         [SerializeField] private GameObject _pauseMenu;
         [SerializeField] private GameObject _gameOverMenu;
+        [SerializeField] private GameObject _hpBar;
 
         private bool _isPaused;
+        private GameObject _currentHpBar;
+        private TextMeshProUGUI _currentHpText;
 
         private void Awake()
         {
@@ -25,6 +28,12 @@ namespace Systems.UI
             else
             {
                 Destroy(this);
+            }
+
+            if (_hpBar != null)
+            {
+                _currentHpBar = _hpBar.transform.GetChild(1).gameObject;
+                _currentHpText = _hpBar.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
             }
         }
 
@@ -128,6 +137,12 @@ namespace Systems.UI
             scoreRect.anchorMin = new Vector2(0.5f, 0.5f);
             scoreRect.pivot = new Vector2(0.5f, 0.5f);
             scoreRect.localPosition = Vector3.zero;
+        }
+
+        public void UpdateHpBar(int hp, int maxHp)
+        {
+            _currentHpBar.GetComponent<Image>().fillAmount = (float)hp / maxHp;
+            _currentHpText.text = hp + " / " + maxHp;
         }
     }
 
