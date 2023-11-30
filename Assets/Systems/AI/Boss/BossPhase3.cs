@@ -1,6 +1,7 @@
 using Enemies.Attack;
 using System.Collections;
 using UnityEngine;
+using Systems.EntityState;
 
 namespace BehaviourTree
 {
@@ -36,7 +37,7 @@ namespace BehaviourTree
             {
                 _boss.GetComponent<BossAttack>().SetDirection((_player.transform.position - _boss.transform.position).normalized);
 
-                if (_canMove)
+                if (_canMove && !_boss.GetComponent<Health>().GetIsDead())
                 {
                     if (Time.time > _coolDown)
                     {
@@ -58,7 +59,7 @@ namespace BehaviourTree
         {
             float time = 0;
 
-            while (time < _moveTiming)
+            while (time < _moveTiming && !_boss.GetComponent<Health>().GetIsDead())
             {
                 _boss.transform.position = Vector2.Lerp(startPos, targetPos, time / _moveTiming);
                 time += Time.deltaTime;
@@ -66,13 +67,23 @@ namespace BehaviourTree
                 yield return null;
             }
 
-            _boss.transform.position = targetPos;
+            if (!_boss.GetComponent<Health>().GetIsDead())
+            {
+                _boss.transform.position = targetPos;
+            }
 
+            ShootTowardPlayer();
+
+            _canMove = true;
+        }
+
+        private void ShootTowardPlayer()
+        {
             Vector2 bulletDir = (_player.transform.position - _shootPos.position).normalized;
 
             float angle = Vector2.SignedAngle(Vector2.up, bulletDir);
 
-            Debug.Log(angle);
+            //Debug.Log(angle);
             angle = -angle;
 
             float startAngle = angle - _angleOffset / 2f;
@@ -80,8 +91,6 @@ namespace BehaviourTree
             float angleStep = (endAngle - startAngle) / _bulletNb;
 
             _behaviour.StartCoroutine(_boss.GetComponent<BossAttack>().LaunchCircleAttack(_shootNb, _atkSpeed, angleStep, startAngle, _bulletNb, _shootPos));
-
-            _canMove = true;
         }
     }
 }

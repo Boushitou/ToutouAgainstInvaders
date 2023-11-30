@@ -112,13 +112,13 @@ namespace Systems.UI
             MoveScore();
         }
 
-        private void OnApplicationFocus(bool focus)
-        {
-            if (!focus && !_isPaused)
-            {
-                OpenClosePauseMenu();
-            }
-        }
+        //private void OnApplicationFocus(bool focus)
+        //{
+        //    if (!focus && !_isPaused)
+        //    {
+        //        OpenClosePauseMenu();
+        //    }
+        //}
 
         public void PauseGame()
         {

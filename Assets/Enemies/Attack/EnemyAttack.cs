@@ -2,6 +2,7 @@ using UnityEngine;
 using Systems.Pooling;
 using UnityEngine.UIElements;
 using System.Collections;
+using Systems.EntityState;
 
 namespace Enemies.Attack
 {
@@ -49,7 +50,7 @@ namespace Enemies.Attack
         {
             if (Time.time > _coolDown)
             {
-                if (_canShoot)
+                if (_canShoot && !GetComponent<Health>().GetIsDead())
                 {
                     if (_patternType == PatternType.Circle)
                     {
