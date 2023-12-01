@@ -37,10 +37,12 @@ namespace Systems.Boids
 
         public void DestroyGoal()
         {
-            if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y - 5)
+            if (_myTransform.position.y < CameraManager.Instance.GetMinBound().y - 7)
             {
-                ObjectPoolManager.ReturnObjectPool(gameObject);
-                SpawnerManager.Instance.RemoveEnemy();
+                Debug.Log("destroy goal");
+                //ObjectPoolManager.ReturnObjectPool(gameObject);
+                FlockManager.Instance._canSpawnGoal = true;
+                Destroy(gameObject);
             }
         }
     }

@@ -3,8 +3,8 @@ using System.Collections;
 using Systems.Pooling;
 using Systems.Spawn;
 using Systems.UI;
+using Systems.Boids;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Systems.EntityState
 {
@@ -29,6 +29,12 @@ namespace Systems.EntityState
             {
                 UIManager.Instance.UpdateHpBar(_currentHealth, _maxHealth);
             }
+        }
+
+        private void OnEnable()
+        {
+            _currentHealth = _maxHealth;
+            _isDead = false;
         }
 
         public void TakeDamage(int damage)
@@ -90,7 +96,10 @@ namespace Systems.EntityState
                     }
                     else
                     {
-                        SpawnerManager.Instance.RemoveEnemy();
+                        if (!gameObject.GetComponent<Boid>())
+                        {
+                            SpawnerManager.Instance.RemoveEnemy();
+                        }
                         UIManager.Instance.AddScore(_scoreAmount);
                         ObjectPoolManager.ReturnObjectPool(gameObject);
                     }
