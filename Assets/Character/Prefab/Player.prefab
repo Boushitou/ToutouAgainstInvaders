@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _bloodParticles: {fileID: 0}
+  _bloodParticles: {fileID: 222593393553989946, guid: acde16384153dca4fab0db149474ddeb, type: 3}
 --- !u!114 &5527871981907466024
 MonoBehaviour:
   m_ObjectHideFlags: 0

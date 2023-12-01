@@ -25,7 +25,7 @@ namespace Systems.EntityState
 
         private void Start()
         {
-            if (!gameObject.CompareTag("Enemy"))
+            if (!gameObject.CompareTag("Enemy") && UIManager.Instance != null)
             {
                 UIManager.Instance.UpdateHpBar(_currentHealth, _maxHealth);
             }
