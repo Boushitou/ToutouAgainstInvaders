@@ -65,7 +65,7 @@ namespace Systems.Spawn
                 {
                     Debug.Log(_currentWave._waveName);
 
-                    if (_currentWave._waveName == "Boss Wave")
+                    if (_currentWave._waveName == "Boss Wave" && !_bossWave)
                     {
                         _bossWave = true;
                         SoundManager.Instance.PlayMusic("Boss");

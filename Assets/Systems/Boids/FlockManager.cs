@@ -72,7 +72,7 @@ namespace Systems.Boids
             for (int i = 0; i < _numBoid; i++)
             {
                 Vector3 pos = new Vector3(Random.Range(-_moveLimit.x, _moveLimit.x),
-                                          Random.Range(-_moveLimit.y, _moveLimit.y) + 15f, 0);
+                                          Random.Range(-_moveLimit.y, _moveLimit.y) + transform.position.y, 0);
 
                 ObjectPoolManager.SpawnObject(_boidPrefab, pos, Quaternion.identity, ObjectPoolManager.PoolType.Boids);
             }
