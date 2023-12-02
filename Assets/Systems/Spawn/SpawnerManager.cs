@@ -24,7 +24,7 @@ namespace Systems.Spawn
         private int _currentWaveNb = 0;
         private int _enemiesLeft = 0;
 
-        private bool _bossDead;
+        [HideInInspector] public bool _bossWave;
 
         private void Awake()
         {
@@ -63,6 +63,12 @@ namespace Systems.Spawn
                 if (_enemiesLeft <= 0)
                 {
                     Debug.Log(_currentWave._waveName);
+
+                    if (_currentWave._waveName == "Boss Wave")
+                    {
+                        _bossWave = true;
+                    }
+
                     index++;
                     _enemiesLeft = _waves[_currentWaveNb]._enemies.Length;
 

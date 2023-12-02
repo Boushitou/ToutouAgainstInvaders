@@ -9,10 +9,7 @@ namespace Systems.Pooling
 
         private GameObject _objectPoolEmptyHolder;
 
-        private static GameObject _playerProjectileEmpty;
-        private static GameObject _enemiesProjectileEmpty;
-        private static GameObject _enemiesEmpty;
-        private static GameObject _particleSystem;
+        private static Dictionary<PoolType, GameObject> _poolTypeEmpties = new Dictionary<PoolType, GameObject>();
 
         public enum PoolType
         {
@@ -20,6 +17,7 @@ namespace Systems.Pooling
             EnemyProjectile,
             Enemies,
             Particules,
+            Boids,
             None
         }
 
@@ -34,17 +32,18 @@ namespace Systems.Pooling
         {
             _objectPoolEmptyHolder = new GameObject("Pooled Objects");
 
-            _playerProjectileEmpty = new GameObject("Player Projectiles");
-            _playerProjectileEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
+            _poolTypeEmpties[PoolType.PlayerProjectile] = CreateEmptyObject("Player Projectiles");
+            _poolTypeEmpties[PoolType.EnemyProjectile] = CreateEmptyObject("Enemy Projectiles");
+            _poolTypeEmpties[PoolType.Enemies] = CreateEmptyObject("Enemies");
+            _poolTypeEmpties[PoolType.Particules] = CreateEmptyObject("Particles");
+            _poolTypeEmpties[PoolType.Boids] = CreateEmptyObject("Boids");
+        }
 
-            _enemiesProjectileEmpty = new GameObject("Enemy Projectiles");
-            _enemiesProjectileEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
-
-            _enemiesEmpty = new GameObject("Enemies");
-            _enemiesEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
-
-            _particleSystem = new GameObject("Particles System");
-            _particleSystem.transform.SetParent(_objectPoolEmptyHolder.transform);
+        private GameObject CreateEmptyObject(string objName)
+        {
+            GameObject emptyObj = new GameObject(objName);
+            emptyObj.transform.SetParent(_objectPoolEmptyHolder.transform);
+            return emptyObj;
         }
 
         public static GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
@@ -109,21 +108,7 @@ namespace Systems.Pooling
 
         public static GameObject SetParentObject(PoolType poolType)
         {
-            switch (poolType)
-            {
-                case PoolType.PlayerProjectile:
-                    return _playerProjectileEmpty;
-                case PoolType.EnemyProjectile:
-                    return _enemiesProjectileEmpty;
-                case PoolType.Enemies:
-                    return _enemiesEmpty;
-                case PoolType.Particules:
-                    return _particleSystem;
-                case PoolType.None:
-                    return null;
-                default: 
-                    return null;
-            }
+            return _poolTypeEmpties.TryGetValue(poolType, out GameObject obj) ? obj : null;
         }
 
         public static void ReturnObjectPool(GameObject obj)
