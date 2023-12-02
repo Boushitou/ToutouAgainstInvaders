@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Systems.Pooling;
+using Systems.Spawn;
 using UnityEngine;
 
 namespace Systems.Boids
@@ -8,15 +9,15 @@ namespace Systems.Boids
     {
         [SerializeField] private GameObject _boidPrefab;
         [SerializeField] private GameObject _goalPrefab;
-        public GameObject _goal;
+        [HideInInspector] public GameObject _goal;
         [Range(0f, 10f)]
 
         public static FlockManager Instance;
 
         public int _numBoid;
         //public GameObject[] _allBoids;
-        public List<GameObject> _allBoids;
-        public Vector3 _moveLimit = new Vector3(10, 10, 10);
+        [HideInInspector] public List<GameObject> _allBoids;
+        [HideInInspector] public Vector3 _moveLimit = new Vector3(10, 10, 10);
 
         [Header("Boid Settings")]
         [Range(0f, 10f)]
@@ -30,10 +31,7 @@ namespace Systems.Boids
         [Range(1f, 20f)]
         public float _steeringSpeed;
 
-        private float nextWave = 20f;
-        private float cooldownWave = 0f;
-
-        public bool _canSpawnGoal = true;
+        [HideInInspector] public bool _canSpawnGoal = true;
 
         private void Awake()
         {
@@ -56,16 +54,15 @@ namespace Systems.Boids
 
         private void Update()
         {
-            if (_goal == null)
+            if (_goal == null && !SpawnerManager.Instance._bossWave)
             {
                 if (Random.Range(0, 100+1) < 5)
                 {
+                    _numBoid = Random.Range(20, 40);
                     SpawnGoal();
                     SpawnBoid();
                 }
             }
-
-            cooldownWave = Time.time + nextWave;
         }
 
         public void SpawnBoid()
@@ -77,14 +74,14 @@ namespace Systems.Boids
                 Vector3 pos = new Vector3(Random.Range(-_moveLimit.x, _moveLimit.x),
                                           Random.Range(-_moveLimit.y, _moveLimit.y) + 15f, 0);
 
-                ObjectPoolManager.SpawnObject(_boidPrefab, pos, Quaternion.identity);
+                ObjectPoolManager.SpawnObject(_boidPrefab, pos, Quaternion.identity, ObjectPoolManager.PoolType.Boids);
             }
         }
 
         public void SpawnGoal()
         {
             Debug.Log("spawn goal");
-            Vector3 spawnPos = new Vector3(21f, transform.position.y, 0f);
+            Vector3 spawnPos = new Vector3(21f, 15f, 0f);
 
             _goal = Instantiate(_goalPrefab, spawnPos, Quaternion.identity);
 

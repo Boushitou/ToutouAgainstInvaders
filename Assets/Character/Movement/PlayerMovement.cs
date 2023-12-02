@@ -68,6 +68,7 @@ namespace Character.Movement
                     if (Time.time > _contactDmgCoolDown)
                     {
                         GetComponent<Health>().TakeDamage(1);
+                        StartCoroutine(CameraManager.Instance.ShakeScreen(0.1f));
                         _contactDmgCoolDown = Time.time + _contactDmgTimer;
                     }
                 }
