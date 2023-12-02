@@ -56,16 +56,16 @@ namespace Systems.Boids
 
         private void Update()
         {
-            if (Time.time > cooldownWave)
+            if (_goal == null)
             {
-                if (_goal == null)
+                if (Random.Range(0, 100+1) < 5)
                 {
                     SpawnGoal();
                     SpawnBoid();
                 }
-
-                cooldownWave = Time.time + nextWave;
             }
+
+            cooldownWave = Time.time + nextWave;
         }
 
         public void SpawnBoid()
