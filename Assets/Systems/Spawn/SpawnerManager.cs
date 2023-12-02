@@ -1,3 +1,4 @@
+using Sound;
 using System.Collections;
 using Systems.Pooling;
 using Systems.UI;
@@ -67,6 +68,7 @@ namespace Systems.Spawn
                     if (_currentWave._waveName == "Boss Wave")
                     {
                         _bossWave = true;
+                        SoundManager.Instance.PlayMusic("Boss");
                     }
 
                     index++;

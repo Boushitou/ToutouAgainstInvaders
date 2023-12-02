@@ -1,4 +1,5 @@
 using Character.Attack;
+using Sound;
 using System.Collections;
 using Systems;
 using Systems.EntityState;
@@ -49,10 +50,12 @@ namespace Enemies.Movement
             {
                 if (collision.gameObject.CompareTag("PlayerBullet"))
                 {
+                    SoundManager.Instance.PlaySound("Enemy Shot", 0.5f);
                     GetComponent<Health>().TakeDamage(1);
 
                     collision.GetComponent<PlayerProjectile>().InstantiateParticles();
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
+
                     if (gameObject.activeSelf)
                     {
                         StartCoroutine(ChangeColor());
