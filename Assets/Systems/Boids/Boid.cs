@@ -1,4 +1,5 @@
 using Character.Attack;
+using Sound;
 using System.Collections.Generic;
 using Systems.EntityState;
 using Systems.Pooling;
@@ -128,6 +129,7 @@ namespace Systems.Boids
             {
                 if (collision.gameObject.CompareTag("PlayerBullet"))
                 {
+                    SoundManager.Instance.PlaySound("Enemy Shot", 0.5f);
                     GetComponent<Health>().TakeDamage(1);
 
                     collision.GetComponent<PlayerProjectile>().InstantiateParticles();

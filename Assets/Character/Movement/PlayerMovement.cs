@@ -1,4 +1,5 @@
 using Enemies.Attack;
+using Sound;
 using Systems;
 using Systems.EntityState;
 using Systems.Pooling;
@@ -54,6 +55,7 @@ namespace Character.Movement
                 {
                     GetComponent<Health>().TakeDamage(collision.GetComponent<EnemyProjectile>().GetDamagge());
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
+                    SoundManager.Instance.PlaySound("Player Hurt");
                     StartCoroutine(CameraManager.Instance.ShakeScreen(0.2f));
                 }
             }
@@ -68,6 +70,7 @@ namespace Character.Movement
                     if (Time.time > _contactDmgCoolDown)
                     {
                         GetComponent<Health>().TakeDamage(1);
+                        SoundManager.Instance.PlaySound("Player Hurt");
                         StartCoroutine(CameraManager.Instance.ShakeScreen(0.1f));
                         _contactDmgCoolDown = Time.time + _contactDmgTimer;
                     }

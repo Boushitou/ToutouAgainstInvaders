@@ -1,4 +1,5 @@
 using Character.Attack;
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using Systems.EntityState;
@@ -57,6 +58,8 @@ namespace BehaviourTree
             {
                 if (collision.gameObject.CompareTag("PlayerBullet"))
                 {
+                    SoundManager.Instance.PlaySound("Enemy Shot", 0.5f);
+
                     GetComponentInParent<Health>().TakeDamage(1);
                     collision.GetComponent<PlayerProjectile>().InstantiateParticles();
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
@@ -85,6 +88,8 @@ namespace BehaviourTree
 
         public IEnumerator BossShake(float shakeTime, float shakeAmount)
         {
+            SoundManager.Instance.PlaySound("Boss Dead");
+
             float time = 0;
 
             Vector3 currentPos = _myTransform.position;
@@ -98,9 +103,12 @@ namespace BehaviourTree
                 yield return null;
             }
 
+            SoundManager.Instance.PlaySound("Boss Dead");
+
             string gameOverTxt = "Congratulation !";
             UIManager.Instance.OpenGameOverMenu(gameOverTxt);
             UIManager.Instance.AddScore(GetComponent<Health>().GetScoreAmount());
+            SoundManager.Instance.PlayMusic("Victory", false);
             ObjectPoolManager.ReturnObjectPool(gameObject);
         }
     }

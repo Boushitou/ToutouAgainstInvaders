@@ -5,6 +5,7 @@ using Systems.Spawn;
 using Systems.UI;
 using Systems.Boids;
 using UnityEngine;
+using Sound;
 
 namespace Systems.EntityState
 {
@@ -102,6 +103,7 @@ namespace Systems.EntityState
                         }
                         UIManager.Instance.AddScore(_scoreAmount);
                         ObjectPoolManager.ReturnObjectPool(gameObject);
+                        SoundManager.Instance.PlaySound("Enemy Dead");
                     }
                 }
                 else
@@ -109,6 +111,7 @@ namespace Systems.EntityState
                     string gameOverTxt = "You died !";
                     Destroy(gameObject);
                     UIManager.Instance.OpenGameOverMenu(gameOverTxt);
+                    SoundManager.Instance.PlayMusic("Defeat", false);
                 }
             }
         }

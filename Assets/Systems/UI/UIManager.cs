@@ -1,3 +1,4 @@
+using Sound;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -112,13 +113,13 @@ namespace Systems.UI
             MoveScore();
         }
 
-        //private void OnApplicationFocus(bool focus)
-        //{
-        //    if (!focus && !_isPaused)
-        //    {
-        //        OpenClosePauseMenu();
-        //    }
-        //}
+        private void OnApplicationFocus(bool focus)
+        {
+            if (!focus && !_isPaused)
+            {
+                OpenClosePauseMenu();
+            }
+        }
 
         public void PauseGame()
         {
@@ -143,6 +144,11 @@ namespace Systems.UI
         {
             _currentHpBar.GetComponent<Image>().fillAmount = (float)hp / maxHp;
             _currentHpText.text = hp + " / " + maxHp;
+        }
+
+        public void PlaySceneSong(string musicName)
+        {
+            SoundManager.Instance.PlayMusic(musicName);
         }
     }
 

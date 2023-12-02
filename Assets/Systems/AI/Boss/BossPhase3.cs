@@ -2,6 +2,7 @@ using Enemies.Attack;
 using System.Collections;
 using UnityEngine;
 using Systems.EntityState;
+using Sound;
 
 namespace BehaviourTree
 {
@@ -58,6 +59,8 @@ namespace BehaviourTree
         private IEnumerator MoveTowardPlayer(Vector2 startPos, Vector2 targetPos)
         {
             float time = 0;
+
+            SoundManager.Instance.PlaySound("Boss Yelp");
 
             while (time < _moveTiming && !_boss.GetComponent<Health>().GetIsDead())
             {

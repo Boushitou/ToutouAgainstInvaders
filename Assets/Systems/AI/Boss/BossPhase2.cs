@@ -2,6 +2,7 @@ using UnityEngine;
 using Systems;
 using Enemies.Attack;
 using Systems.EntityState;
+using Sound;
 
 namespace BehaviourTree
 {
@@ -47,6 +48,9 @@ namespace BehaviourTree
                     bossAttack.SetCanShoot(true);
                     bossAttack.SetPattern(EnemyAttack.PatternType.Spiral);
                     bossAttack.SetAtkSpeed(_atkSpeed);
+
+                    SoundManager.Instance.PlaySound("Boss Yelp");
+
                     _isInCenter = true;
                 }
             }
