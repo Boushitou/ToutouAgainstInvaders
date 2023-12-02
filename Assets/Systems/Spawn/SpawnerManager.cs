@@ -1,3 +1,4 @@
+using Sound;
 using System.Collections;
 using Systems.Pooling;
 using Systems.UI;
@@ -23,6 +24,8 @@ namespace Systems.Spawn
         private Wave _currentWave;
         private int _currentWaveNb = 0;
         private int _enemiesLeft = 0;
+
+        [HideInInspector] public bool _bossWave;
 
         private void Awake()
         {
@@ -61,6 +64,13 @@ namespace Systems.Spawn
                 if (_enemiesLeft <= 0)
                 {
                     Debug.Log(_currentWave._waveName);
+
+                    if (_currentWave._waveName == "Boss Wave" && !_bossWave)
+                    {
+                        _bossWave = true;
+                        SoundManager.Instance.PlayMusic("Boss");
+                    }
+
                     index++;
                     _enemiesLeft = _waves[_currentWaveNb]._enemies.Length;
 
@@ -80,9 +90,6 @@ namespace Systems.Spawn
             }
 
             Debug.Log("Waves over !");
-
-            string gameOverTxt = "Congratulation !";
-            UIManager.Instance.OpenGameOverMenu(gameOverTxt);
         }
 
         public void RemoveEnemy()

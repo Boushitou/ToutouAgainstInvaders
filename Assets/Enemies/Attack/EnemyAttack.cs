@@ -2,6 +2,9 @@ using UnityEngine;
 using Systems.Pooling;
 using UnityEngine.UIElements;
 using System.Collections;
+using Systems.EntityState;
+using Sound;
+using Systems;
 
 namespace Enemies.Attack
 {
@@ -21,6 +24,9 @@ namespace Enemies.Attack
         private float _spiralAngle = 0f;
         private bool _canShoot;
         private Vector3 _bulletVector = Vector3.zero;
+
+        private float _soundPlayTimer = 0.3f;
+        private float _soundCooldown = 0;
 
         public enum PatternType
         {
@@ -49,8 +55,19 @@ namespace Enemies.Attack
         {
             if (Time.time > _coolDown)
             {
-                if (_canShoot)
+                if (_canShoot && !GetComponent<Health>().GetIsDead())
                 {
+                    if (Time.time > _soundCooldown && 
+                        _myTransform.position.y > CameraManager.Instance.GetMinBound().y &&
+                        _myTransform.position.y < CameraManager.Instance.GetMaxBound().y &&
+                        _myTransform.position.x > CameraManager.Instance.GetMinBound().x &&
+                        _myTransform.position.x < CameraManager.Instance.GetMaxBound().x)
+                    {
+                        SoundManager.Instance.PlaySound("Enemy Shoot", 0.5f);
+
+                        _soundCooldown = Time.time + _soundPlayTimer;
+                    }
+
                     if (_patternType == PatternType.Circle)
                     {
                         float angleStep = (_endAngle - _startAngle) / _bulletAmount;
@@ -94,6 +111,8 @@ namespace Enemies.Attack
         {
             for (int i = 0; i <= shootNb; i++)
             {
+                SoundManager.Instance.PlaySound("Enemy Shoot", 0.5f);
+
                 CircleAttack(angleStep, angle, bulletAmount, myTransform, 15f);
 
                 yield return new WaitForSeconds(atkSpeed);

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Systems
@@ -8,6 +9,10 @@ namespace Systems
 
         private Vector2 _minBound;
         private Vector2 _maxBound;
+
+        private Transform _myTransform;
+
+        private float _shakeAmount = 50f;
 
         private Camera _cam;
 
@@ -24,8 +29,23 @@ namespace Systems
 
             _cam = GetComponent<Camera>();
 
+            _myTransform = transform;
+
             _minBound = _cam.ViewportToWorldPoint(new Vector2(0, 0));
             _maxBound = _cam.ViewportToWorldPoint(new Vector2(1, 1));
+        }
+
+        public IEnumerator ShakeScreen(float shakeDuration)
+        {
+            float time = 0;
+
+            while (time < shakeDuration)
+            {
+                _myTransform.position = new Vector3(Mathf.PerlinNoise(_shakeAmount * Time.time, 0), Mathf.PerlinNoise(0, _shakeAmount * Time.time), _myTransform.position.z);
+                time += Time.deltaTime;
+
+                yield return null;
+            }
         }
 
         public Vector2 GetMinBound() { return _minBound; }

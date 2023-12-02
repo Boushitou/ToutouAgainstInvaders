@@ -1,7 +1,11 @@
 using Character.Attack;
+using Sound;
+using System.Collections;
 using System.Collections.Generic;
 using Systems.EntityState;
 using Systems.Pooling;
+using Systems.Spawn;
+using Systems.UI;
 using UnityEngine;
 
 namespace BehaviourTree
@@ -10,6 +14,21 @@ namespace BehaviourTree
     {
         [SerializeField] Transform _shootPos;
         private GameObject _player;
+
+        private Color _originalColor;
+        private Color _damagedColor = Color.red;
+        private SpriteRenderer _spriteRenderer;
+        private Transform _myTransform;
+
+        private float _shakeTime = 4f;
+        private float _shakeAmount = 15f;
+
+        private void Awake()
+        {
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            _originalColor = _spriteRenderer.material.color;
+            _myTransform = transform;
+        }
 
         private void OnEnable()
         {
@@ -39,11 +58,58 @@ namespace BehaviourTree
             {
                 if (collision.gameObject.CompareTag("PlayerBullet"))
                 {
+                    SoundManager.Instance.PlaySound("Enemy Shot", 0.5f);
+
                     GetComponentInParent<Health>().TakeDamage(1);
                     collision.GetComponent<PlayerProjectile>().InstantiateParticles();
                     ObjectPoolManager.ReturnObjectPool(collision.gameObject);
+
+                    if (gameObject.activeSelf)
+                    {
+                        StartCoroutine(ChangeColor());
+                    }
                 }
             }
+        }
+
+        public void DeathAnimation()
+        {
+            StartCoroutine(BossShake(_shakeTime, _shakeAmount));
+        }
+
+        public IEnumerator ChangeColor()
+        {
+            _spriteRenderer.material.color = _damagedColor;
+
+            yield return new WaitForSeconds(0.05f);
+
+            _spriteRenderer.material.color = _originalColor;
+        }
+
+        public IEnumerator BossShake(float shakeTime, float shakeAmount)
+        {
+            SoundManager.Instance.PlaySound("Boss Dead");
+
+            float time = 0;
+
+            Vector3 currentPos = _myTransform.position;
+            Debug.Log(currentPos);
+
+            while (time < shakeTime)
+            {
+                _myTransform.position = new Vector3(currentPos.x + Mathf.PerlinNoise(shakeAmount * Time.time, 0), currentPos.y + Mathf.PerlinNoise(0, shakeAmount * Time.time), _myTransform.position.z);
+                time += Time.deltaTime;
+
+                yield return null;
+            }
+
+            SoundManager.Instance.PlaySound("Boss Dead");
+
+            string gameOverTxt = "Congratulation !";
+            UIManager.Instance.OpenGameOverMenu(gameOverTxt);
+            UIManager.Instance.AddScore(GetComponent<Health>().GetScoreAmount());
+            SoundManager.Instance.PlayMusic("Victory", false);
+            ObjectPoolManager.ReturnObjectPool(gameObject);
         }
     }
 }

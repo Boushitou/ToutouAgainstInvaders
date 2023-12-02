@@ -2,6 +2,7 @@ using Systems.EntityState;
 using UnityEngine;
 using Systems;
 using Enemies.Attack;
+using Sound;
 
 namespace BehaviourTree
 {
@@ -45,6 +46,8 @@ namespace BehaviourTree
                 if (Vector3.Distance(_boss.transform.position, _phase1Pos) <= 0.2f)
                 {
                     _boss.transform.position = _phase1Pos;
+                    SoundManager.Instance.PlaySound("Boss Yelp");
+
                     _isInArena = true;
                 }
             }

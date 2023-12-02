@@ -4,8 +4,8 @@ namespace Enemies.Movement
 {
     public class GreenChalienMovement : EnemyMovement
     {
-        private float _amplitude = 8f;
-        private float _frequency = 2f;
+        public float _amplitude = 8f;
+        public float _frequency = 2f;
         private float _elapsed = 0f;
 
         private void Start()

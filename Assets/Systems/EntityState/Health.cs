@@ -1,7 +1,11 @@
+using BehaviourTree;
+using System.Collections;
 using Systems.Pooling;
 using Systems.Spawn;
 using Systems.UI;
+using Systems.Boids;
 using UnityEngine;
+using Sound;
 
 namespace Systems.EntityState
 {
@@ -9,6 +13,8 @@ namespace Systems.EntityState
     {
         [SerializeField] private int _maxHealth;
         [SerializeField] private int _scoreAmount;
+        [SerializeField] private GameObject _bloodParticles;
+
         private int _currentHealth;
 
         private bool _isDead;
@@ -20,10 +26,16 @@ namespace Systems.EntityState
 
         private void Start()
         {
-            if (!gameObject.CompareTag("Enemy"))
+            if (!gameObject.CompareTag("Enemy") && UIManager.Instance != null)
             {
                 UIManager.Instance.UpdateHpBar(_currentHealth, _maxHealth);
             }
+        }
+
+        private void OnEnable()
+        {
+            _currentHealth = _maxHealth;
+            _isDead = false;
         }
 
         public void TakeDamage(int damage)
@@ -32,26 +44,7 @@ namespace Systems.EntityState
             {
                 _currentHealth -= damage;
 
-                if (_currentHealth <= 0)
-                {
-                    _currentHealth = 0;
-                    _isDead = true;
-
-                    Debug.Log(gameObject.name + " is dead !");
-                    
-                    if (gameObject.CompareTag("Enemy"))
-                    {
-                        SpawnerManager.Instance.RemoveEnemy();
-                        UIManager.Instance.AddScore(_scoreAmount);
-                        ObjectPoolManager.ReturnObjectPool(gameObject);
-                    }
-                    else
-                    {
-                        string gameOverTxt = "You died !";
-                        Destroy(gameObject);
-                        UIManager.Instance.OpenGameOverMenu(gameOverTxt);
-                    }
-                }
+                Death();
 
                 if (!gameObject.CompareTag("Enemy"))
                 {
@@ -84,6 +77,57 @@ namespace Systems.EntityState
             }
         }
 
+        public void Death()
+        {
+            if (_currentHealth <= 0)
+            {
+                _currentHealth = 0;
+                _isDead = true;
+
+                ObjectPoolManager.SpawnObject(_bloodParticles, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Particules);
+
+                Debug.Log(gameObject.name + " is dead !");
+
+                if (gameObject.CompareTag("Enemy"))
+                {
+                    if (TryGetComponent(out BossBT boss))
+                    {
+                        boss.DeathAnimation();
+                        StartCoroutine(PoofExplosion());
+                    }
+                    else
+                    {
+                        if (!gameObject.GetComponent<Boid>())
+                        {
+                            SpawnerManager.Instance.RemoveEnemy();
+                        }
+                        UIManager.Instance.AddScore(_scoreAmount);
+                        ObjectPoolManager.ReturnObjectPool(gameObject);
+                        SoundManager.Instance.PlaySound("Enemy Dead");
+                    }
+                }
+                else
+                {
+                    string gameOverTxt = "You died !";
+                    Destroy(gameObject);
+                    UIManager.Instance.OpenGameOverMenu(gameOverTxt);
+                    SoundManager.Instance.PlayMusic("Defeat", false);
+                }
+            }
+        }
+
+        public IEnumerator PoofExplosion()
+        {
+            while (_isDead)
+            {
+                Vector2 poofPos = new Vector3(transform.position.x + Random.Range(-0.5f, 0.5f), transform.position.y + Random.Range(-0.5f, 0.5f));
+
+                ObjectPoolManager.SpawnObject(_bloodParticles, poofPos, Quaternion.identity, ObjectPoolManager.PoolType.Particules);
+
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+
         public bool GetIsDead()
         {
             return _isDead;
@@ -97,6 +141,11 @@ namespace Systems.EntityState
         public int GetCurrentHealth()
         {
             return _currentHealth;
+        }
+
+        public int GetScoreAmount()
+        {
+            return _scoreAmount;
         }
     }
 }
